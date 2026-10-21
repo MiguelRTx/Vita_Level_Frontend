@@ -27,7 +27,7 @@ migrate_working_dir/
 /build/
 /coverage/
 
-# Symbolication related
+# Symbolication 
 app.*.symbols
 
 # Obfuscation related
