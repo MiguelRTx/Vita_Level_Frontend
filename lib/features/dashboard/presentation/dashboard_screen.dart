@@ -24,14 +24,29 @@ class DashboardScreen extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'TU ESPACIO PERSONAL',
-            style: TextStyle(
-              fontSize: 11,
-              letterSpacing: 2,
-              fontWeight: FontWeight.w700,
-              color: Theme.of(context).colorScheme.primary,
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'TU ESPACIO PERSONAL',
+                  style: TextStyle(
+                    fontSize: 11,
+                    letterSpacing: 2,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+              ),
+              IconButton(
+                tooltip: 'Actualizar resumen',
+                onPressed: () {
+                  ref.invalidate(categoriesProvider);
+                  ref.invalidate(dashboardProvider);
+                  ref.invalidate(profileProvider);
+                },
+                icon: const Icon(Icons.refresh),
+              ),
+            ],
           ),
           const SizedBox(height: 10),
           AsyncContent(
@@ -164,7 +179,7 @@ class _ProfileOverview extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Hola, ${profile.displayName.split(' ').first} 👋',
+          'Hola, ${profile.displayName.split(' ').first} ',
           style: Theme.of(context).textTheme.headlineLarge,
         ),
         const SizedBox(height: 8),

@@ -4,6 +4,32 @@ import 'package:gamification_app/app/store/app_store.dart';
 import 'package:gamification_app/app/router/app_router.dart';
 
 void main() {
+  test('the Redux reducer is deterministic and preserves its input state', () {
+    const state = AppState(
+      status: SessionStatus.signedIn,
+      userId: 'original-user',
+      sessionEpoch: 4,
+      message: 'original-message',
+    );
+    Object snapshot(AppState value) => (
+      value.status,
+      value.userId,
+      value.themeMode,
+      value.sessionEpoch,
+      value.message,
+    );
+    final before = snapshot(state);
+    for (final action in [
+      const ThemeChanged(ThemeMode.dark),
+      const SessionChanged(SessionStatus.signedOut),
+      Object(),
+    ]) {
+      final first = appReducer(state, action);
+      final second = appReducer(state, action);
+      expect(snapshot(first), snapshot(second));
+      expect(snapshot(state), before);
+    }
+  });
   test(
     'Redux clears account identity and changes cache epoch when signing out',
     () {

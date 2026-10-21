@@ -54,7 +54,6 @@ class _RitmoAppState extends State<RitmoApp> with WidgetsBindingObserver {
     store: widget.store,
     child: StoreBuilder<AppState>(
       builder: (context, store) => ProviderScope(
-        // A new session destroys every user-scoped provider cache, including pending requests.
         key: ValueKey(store.state.sessionEpoch),
         overrides: [
           apiClientProvider.overrideWithValue(widget.api),

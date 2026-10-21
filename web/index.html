@@ -17,6 +17,8 @@
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1D6B53">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="Ritmo: tu espacio para construir hábitos, cumplir actividades y alcanzar metas.">
 
@@ -31,16 +33,28 @@
 
   <title>Ritmo · Tu espacio personal</title>
   <link rel="manifest" href="manifest.json">
+  <style>
+    html, body { margin: 0; background: #f7f8f2; }
+    #app-loading {
+      position: fixed; inset: 0; display: grid; place-content: center;
+      text-align: center; font: 16px system-ui, sans-serif; color: #193b31;
+    }
+    #app-loading h1 { font-size: 38px; margin: 0 0 14px; letter-spacing: -1.5px; }
+    #app-loading p { margin: 8px 20px; }
+    #app-loading button {
+      margin: 16px auto; padding: 12px 24px; border: 0; border-radius: 12px;
+      background: #1d6b53; color: white; font: inherit; cursor: pointer;
+    }
+    #app-loading [hidden] { display: none; }
+  </style>
 </head>
 <body>
-  <!--
-    You can customize the "flutter_bootstrap.js" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
-
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
-  -->
+  <div id="app-loading" role="status" aria-live="polite">
+    <h1>ritmo</h1>
+    <p id="loading-message">Preparando tu espacio…</p>
+    <button id="loading-retry" hidden>Volver a intentar</button>
+  </div>
+  <noscript>Activa JavaScript en tu navegador para abrir Ritmo.</noscript>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

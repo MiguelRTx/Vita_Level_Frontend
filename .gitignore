@@ -43,3 +43,36 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Local environment and private build configuration.
+.env
+.env.*
+!.env.example
+!.env.*.example
+.envrc
+.local/
+config/*.local.json
+config/secrets*.json
+secrets/
+.secrets/
+credentials*.json
+service-account*.json
+serviceAccount*.json
+
+# Signing passwords, private keys and provisioning profiles.
+**/local.properties
+**/key.properties
+**/keystore.properties
+*.jks
+*.keystore
+*.pem
+*.key
+*.p12
+*.pfx
+*.mobileprovision
+**/Secrets.xcconfig
+**/xcuserdata/
+
+# Service configuration belongs in the local build environment.
+**/google-services.json
+**/GoogleService-Info.plist

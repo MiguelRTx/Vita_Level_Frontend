@@ -94,7 +94,7 @@ class AppShell extends ConsumerWidget {
                             'Un paso cada día.',
                             style: TextStyle(fontSize: 13),
                           ),
-                          const SizedBox(height: 46),
+                          const SizedBox(height: 28),
                           Text(
                             'MI ESPACIO',
                             style: TextStyle(
@@ -147,34 +147,36 @@ class AppShell extends ConsumerWidget {
                               ],
                             ),
                           ),
-                          const SizedBox(height: 12),
-                          Container(
-                            padding: const EdgeInsets.all(18),
-                            decoration: BoxDecoration(
-                              color: AppTheme.mint,
-                              borderRadius: BorderRadius.circular(18),
-                            ),
-                            child: const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.spa_outlined,
-                                  color: AppTheme.green,
-                                  size: 27,
-                                ),
-                                SizedBox(height: 12),
-                                Text(
-                                  'El progreso empieza\ncon un pequeño paso.',
-                                  style: TextStyle(
-                                    color: AppTheme.ink,
-                                    height: 1.5,
-                                    fontWeight: FontWeight.w600,
+                          if (MediaQuery.sizeOf(context).height >= 900) ...[
+                            const SizedBox(height: 12),
+                            Container(
+                              padding: const EdgeInsets.all(18),
+                              decoration: BoxDecoration(
+                                color: AppTheme.mint,
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              child: const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.spa_outlined,
+                                    color: AppTheme.green,
+                                    size: 27,
                                   ),
-                                ),
-                              ],
+                                  SizedBox(height: 12),
+                                  Text(
+                                    'El progreso empieza\ncon un pequeño paso.',
+                                    style: TextStyle(
+                                      color: AppTheme.ink,
+                                      height: 1.5,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 24),
+                          ],
+                          const SizedBox(height: 16),
                           ListTile(
                             contentPadding: EdgeInsets.zero,
                             leading: CircleAvatar(

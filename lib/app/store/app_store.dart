@@ -19,6 +19,7 @@ class AppState {
   final String? message;
 }
 
+@immutable
 class SessionChanged {
   const SessionChanged(this.status, {this.userId, this.message});
   final SessionStatus status;
@@ -26,6 +27,7 @@ class SessionChanged {
   final String? message;
 }
 
+@immutable
 class ThemeChanged {
   const ThemeChanged(this.mode);
   final ThemeMode mode;
