@@ -9,11 +9,16 @@ abstract final class AppTheme {
     final scheme = ColorScheme.fromSeed(
       seedColor: green,
       brightness: brightness,
+      contrastLevel: .5,
     );
     return ThemeData(
+      fontFamily: 'Roboto',
+      fontFamilyFallback: const ['NotoSansSymbols'],
       useMaterial3: true,
       brightness: brightness,
       colorScheme: scheme,
+      visualDensity: VisualDensity.standard,
+      materialTapTargetSize: MaterialTapTargetSize.padded,
       scaffoldBackgroundColor: dark
           ? const Color(0xFF111B17)
           : const Color(0xFFF7F8F3),
@@ -52,7 +57,11 @@ abstract final class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
           ),
-          textStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
+          textStyle: const TextStyle(
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w700,
+            fontSize: 15,
+          ),
         ),
       ),
       textTheme: TextTheme(

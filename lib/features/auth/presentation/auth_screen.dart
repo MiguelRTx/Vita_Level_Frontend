@@ -61,7 +61,8 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     final register = widget.isRegistration;
-    final wide = MediaQuery.sizeOf(context).width >= 1000;
+    final size = MediaQuery.sizeOf(context);
+    final wide = size.width >= 1200 && size.height >= 780;
     final sessionMessage = ref
         .read(sessionControllerProvider)
         .store
@@ -217,8 +218,11 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                       : Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              register ? 'Crear mi cuenta' : 'Iniciar sesión',
+                            Flexible(
+                              child: Text(
+                                register ? 'Crear mi cuenta' : 'Iniciar sesión',
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                             const SizedBox(width: 12),
                             const Icon(Icons.arrow_forward_rounded, size: 20),

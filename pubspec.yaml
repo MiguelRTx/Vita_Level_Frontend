@@ -20,6 +20,7 @@ dependencies:
   redux: ^5.0.0
   timezone: ^0.11.2
   uuid: ^4.6.0
+  web: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -29,3 +30,17 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/fonts/roboto_license.txt
+    - assets/fonts/noto_symbols_license.txt
+  fonts:
+    - family: NotoSansSymbols
+      fonts:
+        - asset: assets/fonts/noto-sans-symbols.ttf
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/roboto-regular.ttf
+        - asset: assets/fonts/roboto-medium.ttf
+          weight: 500
+        - asset: assets/fonts/roboto-bold.ttf
+          weight: 700

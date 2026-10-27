@@ -4,7 +4,13 @@ import 'package:gamification_app/app/app.dart';
 import 'session_test.dart' show Harness;
 
 void main() {
-  for (final size in [const Size(390, 844), const Size(1366, 900)]) {
+  for (final size in [
+    const Size(320, 568),
+    const Size(390, 844),
+    const Size(768, 600),
+    const Size(1366, 600),
+    const Size(1366, 900),
+  ]) {
     testWidgets(
       'login renders and validates without overflow at ${size.width}',
       (tester) async {
@@ -29,6 +35,10 @@ void main() {
         );
         await tester.pumpAndSettle();
         expect(find.text('Iniciar sesión'), findsOneWidget);
+        expect(
+          tester.widget<MaterialApp>(find.byType(MaterialApp)).title,
+          'Iniciar sesión · Ritmo',
+        );
         expect(tester.takeException(), isNull);
         await tester.ensureVisible(find.byKey(const Key('submit-auth')));
         await tester.tap(find.byKey(const Key('submit-auth')));

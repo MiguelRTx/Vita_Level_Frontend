@@ -27,9 +27,12 @@ From this folder, using an SDK without spaces in its path:
 flutter pub get
 flutter analyze
 flutter test
-flutter run -d chrome --web-port 5173 --dart-define-from-file=config/development.json
+flutter build web --release --csp --no-web-resources-cdn --dart-define-from-file=config/development.json
+node tool/serve_web.mjs
 ```
 
 On this computer, use `..\scripts\flutter.ps1` from here or `.\scripts\flutter.ps1` from the root. Select the short alias of the installed SDK, because the native asset tools of this version fail when launching Dart from some paths with spaces. The global Flutter installation was not modified.
+
+The default script builds optimized web assets and serves them on port 5173 with CSP, gzip, and ETag. Explicit `flutter run` remains a debugging mode. Web-host tests: `node --test tool/serve_web.test.mjs`. The API origin allowed by CSP is configured with `API_ORIGIN` and must match the API URL compiled into Flutter.
 
 Web uses `config/development.json`; the Android emulator uses `config/android-emulator.json`. Do not store secrets in `dart-define`: those values become part of the compiled client. The web session ends upon reloading the page, an explicit MVP decision to avoid persisting the JWT in the browser.

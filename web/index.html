@@ -17,7 +17,6 @@
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#1D6B53">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="Ritmo: tu espacio para construir hábitos, cumplir actividades y alcanzar metas.">
@@ -29,26 +28,18 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="loading.css">
+  <meta property="og:title" content="Ritmo · Actividades, hábitos y metas">
+  <meta property="og:description" content="Construye hábitos y alcanza tus metas con actividades, XP, niveles y logros personales.">
+  <meta property="og:type" content="website">
 
   <title>Ritmo · Tu espacio personal</title>
   <link rel="manifest" href="manifest.json">
-  <style>
-    html, body { margin: 0; background: #f7f8f2; }
-    #app-loading {
-      position: fixed; inset: 0; display: grid; place-content: center;
-      text-align: center; font: 16px system-ui, sans-serif; color: #193b31;
-    }
-    #app-loading h1 { font-size: 38px; margin: 0 0 14px; letter-spacing: -1.5px; }
-    #app-loading p { margin: 8px 20px; }
-    #app-loading button {
-      margin: 16px auto; padding: 12px 24px; border: 0; border-radius: 12px;
-      background: #1d6b53; color: white; font: inherit; cursor: pointer;
-    }
-    #app-loading [hidden] { display: none; }
-  </style>
 </head>
 <body>
+  <div class="spam-trap" aria-hidden="true"><label>Website<input id="form-website" name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
   <div id="app-loading" role="status" aria-live="polite">
     <h1>ritmo</h1>
     <p id="loading-message">Preparando tu espacio…</p>

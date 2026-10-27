@@ -14,6 +14,7 @@ const destinations = [
   (path: '/rewards', label: 'Recompensas', icon: Icons.card_giftcard_rounded),
   (path: '/profile', label: 'Perfil', icon: Icons.person_outline_rounded),
 ];
+const mobilePrimaryDestinationCount = 3;
 
 class AppShell extends ConsumerWidget {
   const AppShell({super.key, required this.path, required this.child});
@@ -52,11 +53,19 @@ class AppShell extends ConsumerWidget {
       bottomNavigationBar: desktop
           ? null
           : NavigationBar(
-              selectedIndex: selected >= 0 && selected < 4 ? selected : 4,
-              onDestinationSelected: (index) =>
-                  context.go(index == 4 ? '/more' : destinations[index].path),
+              selectedIndex:
+                  selected >= 0 && selected < mobilePrimaryDestinationCount
+                  ? selected
+                  : mobilePrimaryDestinationCount,
+              onDestinationSelected: (index) => context.go(
+                index == mobilePrimaryDestinationCount
+                    ? '/more'
+                    : destinations[index].path,
+              ),
               destinations: [
-                for (final item in destinations.take(4))
+                for (final item in destinations.take(
+                  mobilePrimaryDestinationCount,
+                ))
                   NavigationDestination(
                     icon: Icon(item.icon),
                     label: item.label,

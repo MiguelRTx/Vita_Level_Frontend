@@ -530,7 +530,7 @@ class HeatCalendar extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Text(
-          'Menos  ░ ▒ ▓  Más · máximo $maxCount por día',
+          'Intensidad de menos a más · máximo $maxCount por día',
           style: const TextStyle(fontSize: 12),
         ),
       ],

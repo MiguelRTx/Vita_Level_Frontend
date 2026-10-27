@@ -10,6 +10,8 @@ import '../core/widgets/async_content.dart';
 import '../features/auth/application/session_controller.dart';
 import 'router/app_router.dart';
 import 'store/app_store.dart';
+import 'router/route_metadata.dart';
+import '../core/web/page_metadata.dart';
 
 class RitmoApp extends StatefulWidget {
   const RitmoApp({
@@ -26,11 +28,30 @@ class RitmoApp extends StatefulWidget {
 }
 
 class _RitmoAppState extends State<RitmoApp> with WidgetsBindingObserver {
+  String _pageTitle = 'Ritmo';
   late final GoRouter router = createAppRouter(widget.session);
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    router.routerDelegate.addListener(_updateMetadata);
+    _updateMetadata();
+  }
+
+  void _updateMetadata() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final configuration = router.routerDelegate.currentConfiguration;
+      final metadata = routeMetadata(
+        configuration.isEmpty
+            ? router.routeInformationProvider.value.uri.path
+            : configuration.uri.path,
+      );
+      if (_pageTitle != metadata.title) {
+        setState(() => _pageTitle = metadata.title);
+      }
+      updatePageMetadata(metadata.title, metadata.description);
+    });
   }
 
   @override
@@ -45,6 +66,7 @@ class _RitmoAppState extends State<RitmoApp> with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    router.routerDelegate.removeListener(_updateMetadata);
     router.dispose();
     super.dispose();
   }
@@ -60,7 +82,7 @@ class _RitmoAppState extends State<RitmoApp> with WidgetsBindingObserver {
           sessionControllerProvider.overrideWithValue(widget.session),
         ],
         child: MaterialApp.router(
-          title: 'Ritmo',
+          title: _pageTitle,
           debugShowCheckedModeBanner: false,
           theme: AppTheme.create(Brightness.light),
           darkTheme: AppTheme.create(Brightness.dark),

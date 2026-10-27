@@ -166,7 +166,7 @@ void main() {
       expect(quantityMillis('999999999.999'), 999999999999);
     },
   );
-  for (final width in [390.0, 1366.0]) {
+  for (final width in [320.0, 390.0, 1366.0]) {
     for (final empty in [true, false]) {
       testWidgets('charts and empty states render at $width, empty=$empty', (
         tester,
@@ -196,7 +196,9 @@ void main() {
         await tester.ensureVisible(find.text('Calendario de constancia'));
         await tester.pumpAndSettle();
         expect(
-          find.text('Menos  ░ ▒ ▓  Más · máximo ${empty ? 0 : 2} por día'),
+          find.text(
+            'Intensidad de menos a más · máximo ${empty ? 0 : 2} por día',
+          ),
           findsOneWidget,
         );
         expect(tester.takeException(), isNull);

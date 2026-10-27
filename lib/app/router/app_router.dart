@@ -14,6 +14,7 @@ import '../../core/widgets/page_layout.dart';
 import '../app.dart';
 import '../shell/app_shell.dart';
 import '../store/app_store.dart';
+import '../../core/widgets/not_found_screen.dart';
 
 String? sessionRedirect(SessionStatus status, String path) {
   final public = path == '/login' || path == '/register';
@@ -21,7 +22,15 @@ String? sessionRedirect(SessionStatus status, String path) {
       status == SessionStatus.restoreFailed) {
     return path == '/loading' ? null : '/loading';
   }
-  if (status == SessionStatus.signedOut) return public ? null : '/login';
+  if (status == SessionStatus.signedOut) {
+    final private =
+        path == '/' ||
+        path == '/loading' ||
+        RegExp(
+          r'^/(dashboard|activities|projects|history|more|badges|rewards|profile)(/|$)',
+        ).hasMatch(path);
+    return public || !private ? null : '/login';
+  }
   return public || path == '/loading' || path == '/' ? '/dashboard' : null;
 }
 
@@ -30,13 +39,8 @@ GoRouter createAppRouter(SessionController session) => GoRouter(
   refreshListenable: session,
   redirect: (context, state) =>
       sessionRedirect(session.store.state.status, state.uri.path),
-  errorBuilder: (context, state) => Scaffold(
-    body: Center(
-      child: FilledButton(
-        onPressed: () => context.go('/dashboard'),
-        child: const Text('Volver al inicio'),
-      ),
-    ),
+  errorBuilder: (context, state) => NotFoundScreen(
+    signedIn: session.store.state.status == SessionStatus.signedIn,
   ),
   routes: [
     GoRoute(
@@ -94,7 +98,9 @@ GoRouter createAppRouter(SessionController session) => GoRouter(
           builder: (context, state) => PageLayout(
             title: 'Tu espacio',
             children: [
-              for (final item in destinations.skip(4))
+              for (final item in destinations.skip(
+                mobilePrimaryDestinationCount,
+              ))
                 Card(
                   child: ListTile(
                     leading: Icon(item.icon),

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import '../../../core/network/api_client.dart';
+import '../../../core/web/page_metadata.dart';
 
 class AuthResult {
   const AuthResult({
@@ -39,7 +40,10 @@ class AuthRepository {
   ) async {
     final response = await api.dio.post<Map<String, dynamic>>(
       path,
-      data: body,
+      data: {
+        ...body,
+        if (formHoneypotValue().isNotEmpty) 'website': formHoneypotValue(),
+      },
       options: Options(extra: {'requiresAuth': false}),
     );
     return AuthResult.fromJson(

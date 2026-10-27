@@ -12,7 +12,10 @@ function showStartupError() {
 }
 
 // Flutter serves these assets locally in development and includes them in build/web.
-const flutterConfig = { canvasKitBaseUrl: 'canvaskit/' };
+const flutterConfig = {
+  canvasKitBaseUrl: 'canvaskit/',
+  fontFallbackBaseUrl: 'fonts/fallback/',
+};
 _flutter.loader.load({
   config: flutterConfig,
   onEntrypointLoaded: async function(engineInitializer) {
